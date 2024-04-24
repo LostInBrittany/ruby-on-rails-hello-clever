@@ -198,6 +198,10 @@ There are many way to add secret key to your environment and each one is valid. 
      secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
    ```
 
+### Dealing with static files
+
+As we are using `puma` as server, we need to make sure that static assets are procompiled. In order to do it, make sure you have a `CC_RAKEGOALS` environment variable with value `assets:precompile`.
+
 ### Add the Clever Cloud git repository as remote 
 
 ```bash
@@ -229,7 +233,14 @@ To git+ssh://push-n3-par-clevercloud-customers.services.clever-cloud.com/app_83a
 branch 'main' set up to track 'clever/master'.
 ```
 
-And the application will be deployed:
+And the deployment begins:
 
 ![Clever Cloud console](./img/deploying-01.jpg)
 
+After a few moments, the applcation will be deployed:
+
+![Clever Cloud console](./img/deploying-03.jpg)
+
+And we can go to the `/hello` route to verify it works:
+
+![Clever Cloud console](./img/deploying-04.jpg)

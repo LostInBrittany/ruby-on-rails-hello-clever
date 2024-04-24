@@ -22,6 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
+  
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -46,10 +47,10 @@ Rails.application.configure do
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
+  config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)
@@ -99,4 +100,6 @@ Rails.application.configure do
     "ruby-on-rails-hello-clever.cleverapps.io",
     "127.0.0.1"
   ]
+
+  config.serve_static_files = true
 end
