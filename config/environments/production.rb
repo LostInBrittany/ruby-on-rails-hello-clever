@@ -96,6 +96,7 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   config.hosts = [
-    "ruby-on-rails-hello-clever.cleverapps.io"
+    "ruby-on-rails-hello-clever.cleverapps.io",
+    "127.0.0.1"
   ]
 end
