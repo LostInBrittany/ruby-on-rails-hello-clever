@@ -100,6 +100,7 @@ Rails.application.configure do
     "ruby-on-rails-hello-clever.cleverapps.io",
     "127.0.0.1"
   ]
-
+  config.assume_ssl = true
+  config.force_ssl = false
   config.serve_static_files = true
 end

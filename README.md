@@ -178,12 +178,16 @@ In the Clever Cloud console you can see and manage your application domain names
 
 ![Clever Cloud console](./img/deploying-02.jpg)
 
-Now you need to declare the domain name in your clever application, in `config/environments/production.rb`:
+Now you need to declare the domain name in your clever application, in `config/environments/production.rb`. You also need to set some values to deal with SSL and static files:
 
 ```ruby
   config.hosts = [
-    "ruby-on-rails-hello-clever.cleverapps.io"
+    "ruby-on-rails-hello-clever.cleverapps.io",
+    "127.0.0.1"
   ]
+  config.assume_ssl = true
+  config.force_ssl = false
+  config.serve_static_files = true
 ```
 
 ### Dealing with `secret_base_key`
