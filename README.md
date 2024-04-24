@@ -186,6 +186,17 @@ Now you need to declare the domain name in your clever application, in `config/e
   ]
 ```
 
+### Dealing with `secret_base_key`
+
+There are many way to add secret key to your environment and each one is valid. Clever Cloud provides you a secure way so you don’t have to commit any file containing it.
+
+1. Use  `rails credentials:edit` to see your `secret_key_base`
+1. In the Clever Cloud console, declare a `SECRET_KEY_BASE` environment variable and give it the `secret_key_base` value
+1. Add it to your environment in `./config/secret.yml` with:
+   ```yml
+   production:
+     secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+   ```
 
 ### Add the Clever Cloud git repository as remote 
 
