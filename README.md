@@ -155,6 +155,7 @@ Now visit `http://localhost:3000/hello`, and see our text displayed!
 
 ![/hello route in Hello Clever Ruby on Rails](./img/hello_clever-02.jpg)
 
+
 ## Deploying Hello Clever app on Clever Cloud
 
 ### Configure your Ruby on Rails application 
@@ -169,3 +170,55 @@ Be sure that:
 You need to provide a `gems.locked` or `Gemfile.lock` file. To do that ensure you have at least once run `bundle install` in your terminal at the root of your rails project.
 
 If you specify a ruby version in your `gems.rb `of `Gemfile`, we’ll use it. Otherwise, look at the [documentation page](https://developers.clever-cloud.com/doc/applications/ruby/).
+
+
+### Add the domain name as `config.hosts` on your environment file
+
+In the Clever Cloud console you can see and manage your application domain names:
+
+![Clever Cloud console](./img/deploying-02.jpg)
+
+Now you need to declare the domain name in your clever application, in `config/environments/production.rb`:
+
+```ruby
+  config.hosts = [
+    "ruby-on-rails-hello-clever.cleverapps.io"
+  ]
+```
+
+
+### Add the Clever Cloud git repository as remote 
+
+```bash
+$ git remote add clever git+ssh://git@push-n3-par-clevercloud-customers.services.clever-cloud.com/app_83ab63ac-e548-4eb7-ab2e-52e5605b0489.git
+
+$ git add --all
+
+$ git commit -m "Initial commit"
+[main (root-commit) 652bfbb] Initial commit
+ 87 files changed, 1705 insertions(+)
+ create mode 100644 .dockerignore
+ create mode 100644 .gitattributes
+ create mode 100644 .gitignore
+[...]
+ create mode 100644 vendor/.keep
+ create mode 100644 vendor/javascript/.keep
+
+$ git push -u clever main:master
+Enumerating objects: 101, done.
+Counting objects: 100% (101/101), done.
+Delta compression using up to 20 threads
+Compressing objects: 100% (83/83), done.
+Writing objects: 100% (101/101), 93.76 KiB | 5.21 MiB/s, done.
+Total 101 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (3/3), done.
+remote: [SUCCESS] The application has successfully been queued for redeploy.
+To git+ssh://push-n3-par-clevercloud-customers.services.clever-cloud.com/app_83ab63ac-e548-4eb7-ab2e-52e5605b0489.git
+ * [new branch]      main -> master
+branch 'main' set up to track 'clever/master'.
+```
+
+And the application will be deployed:
+
+![Clever Cloud console](./img/deploying-01.jpg)
+
