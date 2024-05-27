@@ -158,6 +158,8 @@ Now visit `http://localhost:3000/hello`, and see our text displayed!
 
 ## Deploying Hello Clever app on Clever Cloud
 
+You can create your application via the web console or using the Clever Tools CLI.
+
 ### Configure your Ruby on Rails application 
 
 Be sure that:
@@ -171,8 +173,11 @@ You need to provide a `gems.locked` or `Gemfile.lock` file. To do that ensure yo
 
 If you specify a ruby version in your `gems.rb `of `Gemfile`, we’ll use it. Otherwise, look at the [documentation page](https://developers.clever-cloud.com/doc/applications/ruby/).
 
+### With the web console
 
-### Add the domain name as `config.hosts` on your environment file
+Refer to [Quickstart](https://developers.clever-cloud.com/doc/quickstart/) for more details on application creation via the console.
+
+#### Add the domain name as `config.hosts` on your environment file
 
 In the Clever Cloud console you can see and manage your application domain names:
 
@@ -190,7 +195,7 @@ Now you need to declare the domain name in your clever application, in `config/e
   config.serve_static_files = true
 ```
 
-### Dealing with `secret_base_key`
+#### Dealing with `secret_base_key`
 
 There are many way to add secret key to your environment and each one is valid. Clever Cloud provides you a secure way so you don’t have to commit any file containing it.
 
@@ -202,11 +207,60 @@ There are many way to add secret key to your environment and each one is valid. 
      secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
    ```
 
-### Dealing with static files
+#### Dealing with static files
 
 As we are using `puma` as server, we need to make sure that static assets are procompiled. In order to do it, make sure you have a `CC_RAKEGOALS` environment variable with value `assets:precompile`.
 
-### Add the Clever Cloud git repository as remote 
+### With the Clever Tools CLI
+
+#### Clever Tools connect
+
+The [Clever Tools CLI](https://developers.clever-cloud.com/doc/cli/getting_started/).
+
+It will allow you to create, configure and deploy your application on Clever Cloud from console.
+
+In the following steps, we will suppose that you name (adapt to your needs) in the Clever Cloud dashboard :
+
+* your application : `ruby-cc-demo` 
+
+#### Create the app
+
+At the root of the project :
+
+```bash
+clever login
+```
+
+Log in the UI and close it. Then create your Ruby application :
+
+```bash
+clever create --type ruby --region par ruby-cc-demo
+```
+
+More information on parameters [HERE](https://www.clever-cloud.com/doc/clever-tools/create/).
+
+#### Environment setup
+
+You need to setup some Environment variables accordingly to your `settings.py` :
+
+```bash
+clever env set CC_RACKUP_SERVER "puma"
+clever env set CC_RAKEGOALS "assets:precompile"
+clever env set SECRET_KEY_BASE "secret_key_base value"
+```
+
+More information on Ruby environement variables [HERE](https://developers.clever-cloud.com/doc/applications/ruby/).
+
+Once deployed, from the Console, your environement variables will look like that on **Expert** mode:
+
+```bash
+CC_RACKUP_SERVER="puma"
+CC_RAKEGOALS="assets:precompile"
+SECRET_KEY_BASE="secret_key_base value"
+```
+
+### Add the Clever Cloud git repository as remote
+
 
 ```bash
 $ git remote add clever git+ssh://git@push-n3-par-clevercloud-customers.services.clever-cloud.com/app_83ab63ac-e548-4eb7-ab2e-52e5605b0489.git
